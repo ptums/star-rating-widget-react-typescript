@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import "./StarRating.css";
 
-/** Default star ratings array state */
-const stars = [1, 2, 3, 4, 5].map((star) => ({
-  id: star,
-  state: false,
-}));
-
+/** type def for the rating star */
 interface Star {
   id: number;
   state: boolean;
 }
+
+/** Default star ratings array state */
+const stars = [1, 2, 3, 4, 5].map((star):Star => ({
+  id: star,
+  state: false,
+}));
 
 const StarRatingWrapper = () => {
   const [starList, setStarList] = useState<Star[]>(stars);
@@ -22,7 +23,7 @@ const StarRatingWrapper = () => {
     const idAsNum = parseInt(currendId);
     
     /** Map through the star list and mutate the state of the star based on its id and current state */
-    const modStarList = starList.map(({ state, id }) => {
+    const modStarList = starList.map(({ state, id }: Star) => {
       if (id <= idAsNum && state === false) {
         return {
           id,
@@ -61,9 +62,9 @@ const StarRatingWrapper = () => {
               ☆
             </div>
           ) : (
-            <span onMouseEnter={handleMouseOver} id={id.toString()}>
+            <div onMouseEnter={handleMouseOver} id={id.toString()}>
               ★
-            </span>
+            </div>
           )}
         </div>
       ))}
