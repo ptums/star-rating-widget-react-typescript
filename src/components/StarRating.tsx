@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./StarRating.css";
 
+/** Default star ratings array state */
 const stars = [1, 2, 3, 4, 5].map((star) => ({
   id: star,
   state: false,
@@ -14,9 +15,13 @@ interface Star {
 const StarRatingWrapper = () => {
   const [starList, setStarList] = useState<Star[]>(stars);
 
+
+  /** Mouse over event handler to toggle between the star states */
   const handleMouseOver = (e: React.MouseEvent<HTMLDivElement>) => {
     const currendId = (e.target as HTMLInputElement).id;
     const idAsNum = parseInt(currendId);
+    
+    /** Map through the star list and mutate the state of the star based on its id and current state */
     const modStarList = starList.map(({ state, id }) => {
       if (id <= idAsNum && state === false) {
         return {
@@ -38,6 +43,7 @@ const StarRatingWrapper = () => {
       };
     });
 
+    /** Set the results of the map as the new state */
     setStarList(modStarList);
   };
 
