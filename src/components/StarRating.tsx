@@ -8,39 +8,40 @@ interface Star {
 }
 
 /** Default star ratings array state */
-const stars = [1, 2, 3, 4, 5].map((star):Star => ({
-  id: star,
-  state: false,
-}));
+const stars = [1, 2, 3, 4, 5].map(
+  (star): Star => ({
+    id: star,
+    state: false
+  })
+);
 
 const StarRatingWrapper = () => {
   const [starList, setStarList] = useState<Star[]>(stars);
 
-
   /** Mouse over event handler to toggle between the star states */
   const handleMouseOver = (e: React.MouseEvent<HTMLDivElement>) => {
     const currendId = (e.target as HTMLInputElement).id;
-    const idAsNum = parseInt(currendId);
-    
+    const idAsNum = parseInt(currendId, 10);
+
     /** Map through the star list and mutate the state of the star based on its id and current state */
     const modStarList = starList.map(({ state, id }: Star) => {
       if (id <= idAsNum && state === false) {
         return {
           id,
-          state: true,
+          state: true
         };
       }
 
       if (id >= idAsNum && state === true) {
         return {
           id,
-          state: false,
+          state: false
         };
       }
 
       return {
         id,
-        state,
+        state
       };
     });
 
@@ -52,7 +53,7 @@ const StarRatingWrapper = () => {
     <div
       style={{
         display: "flex",
-        flexDirection: "row",
+        flexDirection: "row"
       }}
     >
       {starList.map(({ id, state }) => (
